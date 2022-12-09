@@ -2,12 +2,13 @@
 using namespace std;
 
 string uid="";
+int kodid=0;
 int sid=0;
 
 void getid(){
     fstream f;
     f.open("checknow.log", ios::in);
-        f >> uid;
+        f >> uid >> kodid;
     f.close();
 }
 
@@ -17,7 +18,43 @@ bool is_empty(std::ifstream& pFile)
 }
 
 void exec(){
-    string path = "g++ ./submit/" + uid + "/uhankod.cpp -o ./return/uhankod 2> ./log/uohankod.log";
+    /*
+        path = "py3 ./submit/" + uid + "uhankod.py 2> ./log/uohankod.log";
+        path = "mono ./submit/" + uid + "uhankod.cs 2> ./log/uohankod.log";
+        path = "fpc ./submit/" + uid + "uhankod.pas 2> ./log/uohankod.log";
+        path = "gcc ./submit/" + uid + "uhankod.c -o ./return/uhankod 2> ./log/uohankod.log";
+        path = "py2 ./submit/" + uid + "uhankod.py 2> ./log/uohankod.log";
+        path = "javac ./submit" + uid + "uhankod.java 2> ./log/uohankod.log";
+        path = "g++ ./submit/" + uid + "/uhankod.cpp -o ./return/uhankod 2> ./log/uohankod.log";
+      */
+    string path;
+    
+    switch (kodid){
+            case 1:
+            path = "gcc ./submit/" + uid + "uhankod.c -o ./return/uhankod 2> ./log/uohankod.log";
+        break;
+             case 2:
+             path = "g++ ./submit/" + uid + "/uhankod.cpp -o ./return/uhankod 2> ./log/uohankod.log";
+        break;
+             case 3:
+             path = "py2 ./submit/" + uid + "uhankod.py 2> ./log/uohankod.log";
+        break;
+             case 4:
+             path = "py3 ./submit/" + uid + "uhankod.py 2> ./log/uohankod.log";
+        break;
+             case 5:
+            path = "mono ./submit/" + uid + "uhankod.cs 2> ./log/uohankod.log";
+        break;
+             case 6:
+             path = "javac ./submit" + uid + "uhankod.java 2> ./log/uohankod.log";
+        break;
+             case 7:
+             path = "fpc ./submit/" + uid + "uhankod.pas 2> ./log/uohankod.log";
+        break;
+        default:
+        break;
+    }
+    
     const char *cmd = path.c_str();
     system(cmd);    
 }
